@@ -1,0 +1,39 @@
+<div class="container-fluid bg-dark">
+        <h1>Tambah</h1>
+        <div class="container col-10 bg-danger mt-5">
+        <form method="post" action="insert_buku.php">
+  <div class="form-group">
+    <label for="judul">Judul Buku</label>
+    <input type="text" class="form-control" id="judul">
+  </div>
+  <div class="form-group">
+    <label for="pengarang">Pengarang</label>
+    <input type="text" class="form-control" id="pengarang">
+  </div>
+  <div class="form-group">
+    <label for="jenis">Jenis Buku</label>
+    <input type="text" class="form-control" id="jenis">
+  </div>
+  <div class="form-group">
+    <label for="penerbit">Penerbit</label>
+    <input type="text" class="form-control" id="penerbit">
+  </div>
+  <button type="submit" class="btn btn-primary mt-4">Submit</button>
+</form>
+        </div>
+    
+    </div>
+
+
+    <?php 
+$query = mysqli_query($koneksi, "select max(kd_buku) as kodeTerbesar from buku");
+$data = mysqli_fetch_array($query);
+$kodeBuku = $data['kodeTerbesar'];
+$urutan = (int) substr($kodeBuku, 3, 3);
+
+$urutan++;
+$huruf = "BK";
+$kodeBuku = $huruf . sprintf("%03s", $urutan);
+        ?>
+
+href="delete_buku.php?id=<?php echo $d['kd_buku'];?>"
