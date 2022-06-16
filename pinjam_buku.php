@@ -21,7 +21,8 @@
         $data = mysqli_query($koneksi, "select meminjam.id_pinjam,meminjam.tgl_pinjam,meminjam.tgl_kembali,anggota.nm_anggota,buku.judul_buku
          from meminjam
         inner join anggota on meminjam.id_anggota = anggota.id_anggota
-        inner join buku on meminjam.kd_buku = buku.kd_buku");
+        inner join buku on meminjam.kd_buku = buku.kd_buku
+        where kembali = '1'");
         while ($d = mysqli_fetch_array($data)) {
         ?>
             <tr class="text-center">

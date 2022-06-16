@@ -23,8 +23,16 @@
                             </a>
                         </li>
                         <li>
-                            <a href="pinjam_buku.php" class="nav-link px-0 align-middle text-white">
+                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
                                 <i class="fs-4 bi-book"></i> <span class="ms-1 d-none d-sm-inline">Peminjaman Buku</span> </a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="pinjam_buku.php" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline">Pinjam Buku</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline">Riwayat Peminjaman Buku</span></a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="rak_buku.php" class="nav-link px-0 align-middle text-white">
