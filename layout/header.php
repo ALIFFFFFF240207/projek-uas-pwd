@@ -30,7 +30,7 @@
                                     <a href="pinjam_buku.php" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline">Pinjam Buku</span></a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline">Riwayat Peminjaman Buku</span></a>
+                                    <a href="riwayat_peminjaman.php" class="nav-link px-0 text-white"> <span class="d-none d-sm-inline">Riwayat Peminjaman Buku</span></a>
                                 </li>
                             </ul>
                         </li>
