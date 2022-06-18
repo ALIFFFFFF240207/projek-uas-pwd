@@ -11,6 +11,8 @@ $urutan = (int) substr($KdPinjam, 3, 3);
 $urutan++;
 $huruf = "PJ";
 $KdPinjam = $huruf . sprintf("%03s", $urutan);
+$tgl_pinjam = date('mm/dd/yyyy');
+
 ?>
 <div class="col-10">
     <div class="card container col-10 mt-5 ">
@@ -22,7 +24,7 @@ $KdPinjam = $huruf . sprintf("%03s", $urutan);
             <br>
 
             <label class="form-group">Tanggal Pinjam</label><br />
-            <input class="form-control" type="date" name="tgl_pinjam" required="required">
+            <input class="form-control" type="date" name="tgl_pinjam" required="required" id="datePicker" value="">
 
             <br>
 
