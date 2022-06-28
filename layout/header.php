@@ -1,11 +1,12 @@
 <body>
+
     <?php session_start(); ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-2 bg-primary">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                        <span class="fs-5 d-none d-sm-inline">Sistem Informasi Perpustakaan</span>
+                    <a href="index.php" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-5 d-none d-sm-inline"> Sistem Informasi Perpustakaan</span>
                     </a>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                         <li class="nav-item">
@@ -41,7 +42,7 @@
                     <hr>
                     <div class="dropdown pb-4">
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                            <img src="assets/admin.jpg" alt="hugenerd" width="40" class="rounded-circle">
                             <span class="d-none d-sm-inline mx-1"><?php echo $_SESSION['username']; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">

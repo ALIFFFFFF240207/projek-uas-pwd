@@ -12,7 +12,21 @@
 <?php include("layout/header.php") ?>
 <div class="col-10 container">
     <h1>Daftar Koleksi Buku</h1>
+
     <a class="btn btn-success p-2 m-2" href="tambah_buku.php">Tambah Buku</a>
+    <div class="container ">
+        <div class="row justify-content-end">
+            <div class="col-5">
+                <form action="rak_buku.php" method="get">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text"><i class="bi bi-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Cari Buku" name="cari">
+                        <button class="btn btn-primary" type="submit" value="cari">Cari</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <table border="2" class="table">
         <tr class="text-center">
             <th>No.</th>
@@ -25,10 +39,14 @@
         </tr>
         <?php
         include 'koneksi.php';
+        if (isset($_GET['cari'])) {
+            $cari = $_GET['cari'];
+            $data = mysqli_query($koneksi, "select * from buku where judul_buku like '%" . $cari . "%'");
+        } else {
+            $data = mysqli_query($koneksi, "select * from buku");
+        }
         $no = 1;
-        $data = mysqli_query($koneksi, "select * from buku");
         while ($d = mysqli_fetch_array($data)) {
-
         ?>
             <tr class="text-center">
                 <td><?php echo $no++; ?></td>

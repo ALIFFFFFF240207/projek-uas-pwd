@@ -13,6 +13,19 @@
 <div class="col-10 container">
    <h1>Daftar Anggota</h1>
    <a class="btn btn-success p-2 m-2" href="tambah_anggota.php">Tambah Anggota</a>
+   <div class="row justify-content-end">
+      <div class="col-5">
+
+         <form action="anggota.php" method="get">
+            <div class="input-group mb-3">
+               <span class="input-group-text" id="cari"><i class="bi bi-search"></i></span>
+               <input type="text" class="form-control" placeholder="cari nama anggota" name="cari">
+               <button class="btn btn-primary" type="submit" value="cari">Cari</button>
+            </div>
+         </form>
+      </div>
+   </div>
+
    <table border="2" class="table">
       <tr class="text-center">
          <th>No.</th>
@@ -26,11 +39,14 @@
       </tr>
       <?php
       include 'koneksi.php';
-
+      if (isset($_GET['cari'])) {
+         $cari = $_GET['cari'];
+         $data = mysqli_query($koneksi, "select * from anggota where nm_anggota like '%" . $cari . "%'");
+      } else {
+         $data = mysqli_query($koneksi, "select * from anggota");
+      }
       $no = 1;
-      $data = mysqli_query($koneksi, "select * from anggota");
       while ($d = mysqli_fetch_array($data)) {
-
       ?>
          <tr class="text-center">
             <td><?php echo $no++; ?></td>
