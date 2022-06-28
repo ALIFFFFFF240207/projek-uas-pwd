@@ -10,23 +10,82 @@
    <title>Halaman Anggota</title>
 </head>
 <?php include("layout/header.php") ?>
-<div class="col-10 container">
+<div class="col-10">
    <h1>Daftar Anggota</h1>
-   <a class="btn btn-success p-2 m-2" href="tambah_anggota.php">Tambah Anggota</a>
-   <div class="row justify-content-end">
-      <div class="col-5">
-
-         <form action="anggota.php" method="get">
-            <div class="input-group mb-3">
-               <span class="input-group-text" id="cari"><i class="bi bi-search"></i></span>
-               <input type="text" class="form-control" placeholder="cari nama anggota" name="cari">
-               <button class="btn btn-primary" type="submit" value="cari">Cari</button>
-            </div>
-         </form>
-      </div>
-   </div>
 
    <table border="2" class="table">
+      <div class="row">
+         <div class="col-5">
+            <a id="tombolUbah" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tambahModal">Tambah Anggota</a>
+            <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                     <div class="modal-body">
+                        <?php
+                        include 'koneksi.php';
+                        $query = mysqli_query($koneksi, "select max(id_anggota) as kodeTerbesar from anggota");
+                        $data = mysqli_fetch_array($query);
+                        $kodeAnggota = $data['kodeTerbesar'];
+                        $urutan = (int) substr($kodeAnggota, 3, 3);
+                        $urutan++;
+                        $huruf = "AG";
+                        $kodeAnggota = $huruf . sprintf("%03s", $urutan);
+                        ?>
+                        <form method="post" action="insert_anggota.php" autocomplete="off">
+                           <label class="form-group">Id Anggota</label><br />
+                           <input class="form-control" type="text" name="id_anggota" required="required" value="<?php echo $kodeAnggota ?>" readonly>
+
+                           <br>
+
+                           <label class="form-group">Nama Anggota</label><br />
+                           <input class="form-control" type="text" name="nm_anggota" required="required">
+
+                           <br>
+
+                           <label class="form-group">Alamat</label><br />
+                           <input class="form-control" type="text" name="alamat" required="required">
+
+                           <br>
+
+                           <label class="form-group">Tanggal Lahir</label><br />
+                           <input class="form-control" type="date" name="tgl_lahir" required="required">
+
+                           <br>
+
+                           <label class="form-group">Tanggal Daftar</label><br />
+                           <input class="form-control" type="date" name="tgl_daftar" required="required">
+
+                           <br>
+
+                           <label class="form-group">Status Anggota</label><br />
+                           <input class="form-control" type="text" name="sts_anggota" required="required" value="aktif" readonly>
+                           <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                              <button type="submit" class="btn btn-primary">Simpan</button>
+                           </div>
+                        </form>
+
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-2">
+         </div>
+         <div class="col-5">
+            <form action="anggota.php" method="get">
+               <div class="input-group mb-3">
+                  <span class="input-group-text" id="cari"><i class="bi bi-search"></i></span>
+                  <input type="text" class="form-control" placeholder="cari nama anggota" name="cari">
+                  <button class="btn btn-primary" type="submit" value="cari">Cari</button>
+               </div>
+            </form>
+         </div>
+      </div>
       <tr class="text-center">
          <th>No.</th>
          <th>ID Anggota</th>
@@ -57,12 +116,74 @@
             <td><?php echo $d['tgl_daftar']; ?></td>
             <td><?php echo $d['sts_anggota']; ?></td>
             <td>
-               <a class="btn btn-primary" href="edit_anggota.php?id=<?php echo $d['id_anggota']; ?>">Ubah</a>
+               <a id="tombolUbah" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ubahModal<?php echo $d['id_anggota'] ?>">Ubah</a>
                |
-               <!-- Button trigger modal -->
-               <a class="btn btn-outline-danger" href="delete_anggota.php?id=<?php echo $d['id_anggota']; ?>">Hapus</a>
+               <a id="tombolhapus" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#hapusModal<?php echo $d['id_anggota'] ?>">Hapus</a>
 
+               <div class="modal fade" id="ubahModal<?php echo $d['id_anggota'] ?>" tabindex="-1">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header">
+                           <h5 class="modal-title">Form Ubah Data Anggota</h5>
+                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                           <form method="post" action="update_anggota.php">
+                              <label class="form-group">Id Anggota</label><br />
+                              <input class="form-control" readonly name="id_anggota" value="<?php echo $d['id_anggota']; ?>">
 
+                              <br>
+
+                              <label class="form-group">Nama Anggota</label><br />
+                              <input class="form-control" type="text" name="nm_anggota" value="<?php echo $d['nm_anggota']; ?>">
+
+                              <br>
+
+                              <label class="form-group">Alamat</label><br />
+                              <input class="form-control" type="text" name="alamat" value="<?php echo $d['alamat']; ?>">
+
+                              <br>
+
+                              <label class="form-group">Tanggal Lahir</label><br />
+                              <input class="form-control" type="date" name="tgl_lahir" value="<?php echo $d['tgl_lahir']; ?>">
+
+                              <br>
+
+                              <label class="form-group">Tanggal Daftar</label><br />
+                              <input class="form-control" type="date" name="tgl_daftar" value="<?php echo $d['tgl_daftar']; ?>">
+
+                              <br>
+
+                              <label class="form-group">Status Anggota</label><br />
+                              <input class="form-control" type="text" name="sts_anggota" value="<?php echo $d['sts_anggota']; ?>">
+                              <div class="modal-footer">
+                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                 <button type="submit" class="btn btn-primary">Ubah</button>
+                              </div>
+                           </form>
+
+                        </div>
+
+                     </div>
+                  </div>
+               </div>
+               <div class="modal fade" id="hapusModal<?php echo $d['id_anggota'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header">
+                           <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Hapus Data</h5>
+                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                           Apakah anda yakin ingin menghapus <?php echo $d['nm_anggota'] ?> ?
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                           <a href="delete_anggota.php?id=<?php echo $d['id_anggota']; ?>" class="btn btn-outline-danger">Hapus</a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
             </td>
          </tr>
 

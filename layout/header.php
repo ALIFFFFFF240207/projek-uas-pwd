@@ -1,3 +1,7 @@
+<head>
+    <link rel="stylesheet" href="sweetalert2.min.css">
+</head>
+
 <body>
 
     <?php session_start(); ?>
