@@ -1,5 +1,6 @@
 <head>
     <link rel="stylesheet" href="sweetalert2.min.css">
+    <link rel="stylesheet" href="../assets/global_style.css">
 </head>
 
 <body>

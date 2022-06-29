@@ -12,22 +12,76 @@
 <?php include("layout/header.php") ?>
 <div class="col-10 container">
     <h1>Daftar Koleksi Buku</h1>
+    <table border="2" class="table">
+        <div class="row">
+            <div class="col-5">
+                <a id="tombolUbah" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tambahModal">Tambah buku</a>
+                <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Buku</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <?php
+                                include 'koneksi.php';
+                                $query = mysqli_query($koneksi, "select max(kd_buku) as kodeTerbesar from buku");
+                                $data = mysqli_fetch_array($query);
+                                $kodeBuku = $data['kodeTerbesar'];
+                                $urutan = (int) substr($kodeBuku, 3, 3);
 
-    <a class="btn btn-success p-2 m-2" href="tambah_buku.php">Tambah Buku</a>
-    <div class="container ">
-        <div class="row justify-content-end">
+                                $urutan++;
+                                $huruf = "BK";
+                                $kodeBuku = $huruf . sprintf("%03s", $urutan);
+                                ?>
+                                <form method="post" action="insert_buku.php" autocomplete="off">
+                                    <label class="form-group">Kode Buku</label><br />
+                                    <input class="form-control" type="text" name="kd_buku" required="required" value="<?php echo $kodeBuku ?>" readonly>
+
+                                    <br>
+
+                                    <label class="form-group">Judul Buku</label><br />
+                                    <input class="form-control" type="text" name="judul_buku" required="required">
+
+                                    <br>
+
+
+                                    <label class="form-group">Pengarang</label><br />
+                                    <input class="form-control" type="text" name="pengarang" required="required">
+
+                                    <br>
+
+                                    <label class="form-group">Jenis Buku</label><br />
+                                    <input class="form-control" type="text" name="jenis_buku" required="required">
+
+                                    <br>
+
+                                    <label class="form-group">penerbit</label><br />
+                                    <input class="form-control" type="text" name="penerbit" required="required">
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+            </div>
             <div class="col-5">
                 <form action="rak_buku.php" method="get">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text"><i class="bi bi-search"></i></span>
-                        <input type="text" class="form-control" placeholder="Cari Buku" name="cari">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="cari"><i class="bi bi-search"></i></span>
+                        <input type="text" class="form-control" placeholder="cari judul buku" name="cari">
                         <button class="btn btn-primary" type="submit" value="cari">Cari</button>
                     </div>
                 </form>
             </div>
         </div>
-    </div>
-    <table border="2" class="table">
         <tr class="text-center">
             <th>No.</th>
             <th>Kode Buku</th>
@@ -56,10 +110,72 @@
                 <td><?php echo $d['jenis_buku']; ?></td>
                 <td><?php echo $d['penerbit']; ?></td>
                 <td>
-                    <a class="btn btn-primary" href="edit_buku.php?id=<?php echo $d['kd_buku']; ?>">Ubah</a>
+                    <a id="tombolUbah" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ubahModal<?php echo $d['kd_buku'] ?>">Ubah</a>
                     |
-                    <a href="delete_buku.php?id=<?php echo $d['kd_buku']; ?>" class="btn btn-outline-danger">Hapus</a>
+                    <a id="tombolhapus" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#hapusModal<?php echo $d['kd_buku'] ?>">Hapus</a>
 
+                    <div class="modal fade" id="ubahModal<?php echo $d['kd_buku'] ?>" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Form Ubah Data Buku</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" action="update_buku.php">
+                                        <label class="form-group">Kode Buku</label><br />
+                                        <input class="form-control" readonly name="kd_buku" value="<?php echo $d['kd_buku']; ?>">
+
+                                        <br>
+
+                                        <label class="form-group">Judul Buku</label><br />
+                                        <input class="form-control" type="text" name="judul_buku" value="<?php echo $d['judul_buku']; ?>">
+
+                                        <br>
+
+                                        <label class="form-group">Pengarang</label><br />
+                                        <input class="form-control" type="text" name="pengarang" value="<?php echo $d['pengarang']; ?>">
+
+                                        <br>
+
+                                        <label class="form-group">Jenis Buku</label><br />
+                                        <input class="form-control" type="text" name="jenis_buku" value="<?php echo $d['jenis_buku']; ?>">
+
+                                        <br>
+
+                                        <label class="form-group">Penerbit</label><br />
+                                        <input class="form-control" type="text" name="penerbit" value="<?php echo $d['penerbit']; ?>">
+
+                                        <br>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                            <button type="submit" class="btn btn-primary">Ubah</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="hapusModal<?php echo $d['kd_buku'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Hapus Data</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Apakah anda yakin ingin menghapus <?php echo $d['judul_buku'] ?> ?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                    <a href="delete_buku.php?id=<?php echo $d['kd_buku']; ?>" class="btn btn-outline-danger">Hapus</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
 
