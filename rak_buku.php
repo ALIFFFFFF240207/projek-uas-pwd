@@ -107,7 +107,7 @@
                 <td><?php echo $d['kd_buku']; ?></td>
                 <td><?php echo $d['judul_buku']; ?></td>
                 <td><?php echo $d['pengarang']; ?></td>
-                <td><?php echo $d['jenis_buku']; ?></td>
+                <td><?php echo $d['kategori']; ?></td>
                 <td><?php echo $d['penerbit']; ?></td>
                 <td>
                     <a id="tombolUbah" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ubahModal<?php echo $d['kd_buku'] ?>">Ubah</a>
@@ -139,7 +139,7 @@
                                         <br>
 
                                         <label class="form-group">Jenis Buku</label><br />
-                                        <input class="form-control" type="text" name="jenis_buku" value="<?php echo $d['jenis_buku']; ?>">
+                                        <input class="form-control" type="text" name="jenis_buku" value="<?php echo $d['kategori']; ?>">
 
                                         <br>
 
