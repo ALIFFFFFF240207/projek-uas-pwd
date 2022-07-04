@@ -52,14 +52,36 @@
 
                                     <br>
 
-                                    <label class="form-group">Jenis Buku</label><br />
-                                    <input class="form-control" type="text" name="jenis_buku" required="required">
+                                    <label class="form-group">Kategori Buku</label><br />
+                                    <select class="form-select" name="kategori">
+                                        <option selected>Pilih Kategori Buku</option>
+                                        <?php
+                                        include 'koneksi.php';
+                                        $data = mysqli_query($koneksi, "select * from kategori");
+                                        while ($d = mysqli_fetch_array($data)) {
+                                            echo "<option value='" . $d['id_kategori'] . "'>" . $d['nama_kategori'] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                    <br>
+                                    <label class="form-group">Rak</label><br />
+                                    <select class="form-select" name="rak">
+                                        <option selected>Pilih Rak</option>
+                                        <?php
+                                        include 'koneksi.php';
+                                        $data = mysqli_query($koneksi, "select * from rak");
+                                        while ($d = mysqli_fetch_array($data)) {
+                                            echo "<option value='" . $d['id_rak'] . "'>" . $d['nama_rak'] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
 
                                     <br>
 
                                     <label class="form-group">penerbit</label><br />
                                     <input class="form-control" type="text" name="penerbit" required="required">
                                     <div class="modal-footer">
+
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                         <button type="submit" class="btn btn-primary">Simpan</button>
                                     </div>
@@ -87,8 +109,9 @@
             <th>Kode Buku</th>
             <th>Judul Buku</th>
             <th>Pengarang</th>
-            <th>Jenis Buku</th>
+            <th>Kategori Buku</th>
             <th>Penerbit</th>
+            <th>Rak</th>
             <th>Aksi</th>
         </tr>
         <?php
@@ -97,7 +120,9 @@
             $cari = $_GET['cari'];
             $data = mysqli_query($koneksi, "select * from buku where judul_buku like '%" . $cari . "%'");
         } else {
-            $data = mysqli_query($koneksi, "select * from buku");
+            $data = mysqli_query($koneksi, "select buku.kd_buku, buku.judul_buku, buku.pengarang, buku.kategori ,kategori.nama_kategori, buku.penerbit, buku.rak, rak.nama_rak from buku
+            inner join kategori on buku.kategori = kategori.id_kategori
+            inner join rak on buku.rak = rak.id_rak");
         }
         $no = 1;
         while ($d = mysqli_fetch_array($data)) {
@@ -107,8 +132,9 @@
                 <td><?php echo $d['kd_buku']; ?></td>
                 <td><?php echo $d['judul_buku']; ?></td>
                 <td><?php echo $d['pengarang']; ?></td>
-                <td><?php echo $d['kategori']; ?></td>
+                <td><?php echo $d['nama_kategori']; ?></td>
                 <td><?php echo $d['penerbit']; ?></td>
+                <td><?php echo $d['nama_rak']; ?></td>
                 <td>
                     <a id="tombolUbah" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ubahModal<?php echo $d['kd_buku'] ?>">Ubah</a>
                     |
@@ -138,22 +164,40 @@
 
                                         <br>
 
-                                        <label class="form-group">Jenis Buku</label><br />
-                                        <input class="form-control" type="text" name="jenis_buku" value="<?php echo $d['kategori']; ?>">
-
+                                        <label class="form-group">Kategori Buku</label><br />
+                                        <select class="form-select" name="kategori">
+                                            <option selected value="<?php echo $d['kategori']; ?>"><?php echo $d['nama_kategori']; ?></option>
+                                            <?php
+                                            include 'koneksi.php';
+                                            $kategori = mysqli_query($koneksi, "select * from kategori");
+                                            while ($k = mysqli_fetch_array($kategori)) {
+                                                echo "<option value='" . $k['id_kategori'] . "'>" . $k['nama_kategori'] . "</option>";
+                                            }
+                                            ?>
+                                        </select>
                                         <br>
 
-                                        <label class="form-group">Penerbit</label><br />
+                                        <label class="form-group">penerbit</label><br />
                                         <input class="form-control" type="text" name="penerbit" value="<?php echo $d['penerbit']; ?>">
 
                                         <br>
 
+                                        <label class="form-group">Rak</label><br />
+                                        <select class="form-select" name="rak">
+                                            <option selected value="<?php echo $d['rak']; ?>"><?php echo $d['nama_rak']; ?></option>
+                                            <?php
+                                            include 'koneksi.php';
+                                            $rak = mysqli_query($koneksi, "select * from rak");
+                                            while ($r = mysqli_fetch_array($rak)) {
+                                                echo "<option value='" . $r['id_rak'] . "'>" . $r['nama_rak'] . "</option>";
+                                            }
+                                            ?>
+                                        </select>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                             <button type="submit" class="btn btn-primary">Ubah</button>
                                         </div>
                                     </form>
-
                                 </div>
 
                             </div>

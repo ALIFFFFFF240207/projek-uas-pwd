@@ -36,8 +36,8 @@
                         <div class="card-text">
                             <form action="cek_login.php" method="post">
                                 <div class="form-group my-3">
-                                    <label for="username">username</label>
-                                    <input type="text" class="form-control form-control-sm" name="username" placeholder="masukkan username" />
+                                    <label for="username">nomer induk</label>
+                                    <input type="text" class="form-control form-control-sm" name="nomer_induk" placeholder="masukkan nomer induk" />
                                 </div>
                                 <div class="form-group my-3">
                                     <label for="password">password</label>

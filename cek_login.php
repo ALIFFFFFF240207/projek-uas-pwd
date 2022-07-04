@@ -1,23 +1,26 @@
 <?php
-//mengaktifkan session php
+require 'koneksi.php';
+
 session_start();
 
-//menghubungkan dengan koneksi
-include 'koneksi.php';
-
-//menangkap data yang dikirim dari form
-$username = $_POST['username'];
+$nomer_induk = $_POST['nomer_induk'];
 $password = $_POST['password'];
 
-//menyeleksi data admin dengan username dan password yang sesuai
-$data = mysqli_query($koneksi, "select * from admin where username='$username' and password='$password'");
-//menghitung jumlah data yang ditemukan
-$cek = mysqli_num_rows($data);
+$sql = mysqli_query($koneksi, "select * from user where nomer_induk = '$nomer_induk' and password = '$password' ");
 
+$cek = mysqli_num_rows($sql);
 if ($cek > 0) {
-    $_SESSION['username'] = $username;
-    $_SESSION['status'] = "login";
-    header("location:index.php");
-} else {
-    header("location:login.php?pesan=gagal");
+    $data = mysqli_fetch_assoc($sql);
+
+    if ($data['level'] == "admin") {
+        $_SESSION['user'] = $data['nomer_induk'];
+        $_SESSION['level'] = "admin";
+        header("location:index.php");
+    } else if ($data['level'] == "user") {
+        $_SESSION['user'] = $data['nomer_induk'];
+        $_SESSION['level'] = "user";
+        header("location:user/index.php");
+    } else {
+        header("location:login.php?alert=gagal");
+    }
 }
