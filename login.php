@@ -31,10 +31,27 @@
                 });
             </script>
         <?php } else if ($_GET['pesan'] == 'berhasil') { ?>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Pendaftaran Berhasil!</strong> Akun anda telah terdaftar, silahkan masuk.
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+            <script>
+                document.addEventListener("DOMContentLoaded", function(event) {
+                    Swal.fire({
+                        title: 'Pendaftaran Berhasil!',
+                        text: "Silahkan Masukkan Nomor Induk dan Password",
+                        icon: 'success',
+                        confirmButtonColor: '#0275d8'
+                    })
+                });
+            </script>
+        <?php } else if ($_GET['pesan'] == 'logout') { ?>
+            <script>
+                document.addEventListener("DOMContentLoaded", function(event) {
+                    Swal.fire({
+                        title: 'Berhasil Logout',
+                        text: "Anda Berhasil Keluar Dari Aplikasi",
+                        icon: 'success',
+                        confirmButtonColor: '#0275d8'
+                    })
+                });
+            </script>
         <?php } ?>
     <?php } ?>
 

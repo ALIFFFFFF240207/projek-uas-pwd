@@ -43,10 +43,10 @@
             ?>
             <div class="row">
                 <h2>Jumlah Koleksi Buku</h2>
-                <div class="col-4">
-
+                <div class="col-5">
+                    <a class="text text-white" href="rak_buku.php">lihat detail <i class="bi bi-arrow-right-circle-fill"></i></a>
                 </div>
-                <div class="col-8 text-end">
+                <div class="col-7 text-end">
                     <h1><b><?php echo $data_buku['total_buku'] ?></b></h1>
                 </div>
             </div>
@@ -54,15 +54,16 @@
         <div class="col-3 bg-primary rounded p-4 mx-3">
             <?php
             include('koneksi.php');
-            $result = mysqli_query($koneksi, "select count(*) as total_anggota from anggota");
+            $result = mysqli_query($koneksi, "select count(*) as total_anggota from user where level='user'");
             $data_anggota = mysqli_fetch_assoc($result);
             ?>
             <div class="row">
                 <h2>Jumlah Anggota Perpustakaan</h2>
-                <div class="col-4">
+                <div class="col-5">
+                    <a class="text text-white" href="anggota.php">lihat detail <i class="bi bi-arrow-right-circle-fill"></i></a>
 
                 </div>
-                <div class="col-8 text-end">
+                <div class="col-7 text-end">
                     <h1><b><?php echo $data_anggota['total_anggota'] ?></b></h1>
                 </div>
             </div>
@@ -76,10 +77,11 @@
             <h2>Jumlah Buku Yang Dipinjam</h2>
             <div class="row">
 
-                <div class="col-4">
+                <div class="col-5">
+                    <a class="text text-white" href="pinjam_buku.php">lihat detail <i class="bi bi-arrow-right-circle-fill"></i></a>
 
                 </div>
-                <div class="col-8 text-end">
+                <div class="col-7 text-end">
                     <h1><b><?php echo $data_pinjam['total_pinjam'] ?></b></h1>
                 </div>
             </div>

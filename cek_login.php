@@ -11,12 +11,13 @@ $cek = mysqli_num_rows($sql);
 if ($cek != 0) {
     $data = mysqli_fetch_assoc($sql);
     if ($password == $data['password'] && $data['level'] == 'admin') {
+        $_SESSION['id_user'] = $data['id_user'];
         $_SESSION['nama_lengkap'] = $data['nama_lengkap'];
-        $_SESSION['nomor_induk'] = $data['nomor_induk'];
+        $_SESSION['id_user'] = $data['id_user'];
         header("location:index.php?pesan=berhasil");
     } else if ($password == $data['password'] && $data['level'] == 'user') {
         $_SESSION['nama_lengkap'] = $data['nama_lengkap'];
-        $_SESSION['nomor_induk'] = $data['nomor_induk'];
+        $_SESSION['id_user'] = $data['id_user'];
         header("location:user/index.php?pesan=berhasil");
     } else {
         header("location:login.php?pesan=gagal");

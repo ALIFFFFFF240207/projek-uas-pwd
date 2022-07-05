@@ -25,9 +25,9 @@
         <?php
         include 'koneksi.php';
         $no = 1;
-        $data = mysqli_query($koneksi, "select meminjam.id_pinjam,meminjam.tgl_pinjam,meminjam.tgl_kembali,anggota.nm_anggota,buku.judul_buku
+        $data = mysqli_query($koneksi, "select meminjam.id_pinjam,meminjam.tgl_pinjam,meminjam.tgl_kembali,user.nama_lengkap,buku.judul_buku
         from meminjam
-       inner join anggota on meminjam.id_anggota = anggota.id_anggota
+       inner join user on meminjam.id_user = user.id_user
        inner join buku on meminjam.kd_buku = buku.kd_buku
        where kembali = '2'");
         while ($d = mysqli_fetch_array($data)) {
@@ -38,7 +38,7 @@
                 <td><?php echo $d['id_pinjam']; ?></td>
                 <td><?php echo $d['tgl_pinjam']; ?></td>
                 <td><?php echo $d['tgl_kembali']; ?></td>
-                <td><?php echo $d['nm_anggota']; ?></td>
+                <td><?php echo $d['nama_lengkap']; ?></td>
                 <td><?php echo $d['judul_buku']; ?></td>
                 <td>
                     <a href="delete_riwayat.php?id=<?php echo $d['id_pinjam']; ?>" class="btn btn-outline-danger">Hapus</a>

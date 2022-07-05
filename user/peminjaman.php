@@ -15,42 +15,60 @@
     <table border="2" class="table">
         <tr class="text-center">
             <th>No.</th>
+            <th>Id Pinjam</th>
             <th>Kode Buku</th>
             <th>Judul Buku</th>
             <th>Tanggal Pinjam</th>
             <th>Tanggal Kembali</th>
+            <th>Status</th>
             <th>Aksi</th>
         </tr>
         <?php
         include 'koneksi.php';
         if (isset($_GET['cari'])) {
             $cari = $_GET['cari'];
+
             $data = mysqli_query($koneksi, "select * from meminjam where judul_buku like '%" . $cari . "%'");
         } else {
-            $data = mysqli_query($koneksi, "select meminjam.kd_buku, buku.judul_buku , meminjam.tgl_pinjam, meminjam.tgl_kembali from meminjam
-            inner join buku on meminjam.kd_buku = buku.kd_buku");
+            $id_user = $_SESSION['id_user'];
+            $data = mysqli_query($koneksi, "select meminjam.id_pinjam, meminjam.kd_buku, buku.judul_buku , meminjam.tgl_pinjam, meminjam.tgl_kembali, meminjam.kembali from meminjam
+            inner join buku on meminjam.kd_buku = buku.kd_buku where id_user='$id_user'");
         }
         $no = 1;
         while ($d = mysqli_fetch_array($data)) {
         ?>
             <tr class="text-center">
                 <td><?php echo $no++; ?></td>
+                <td><?php echo $d['id_pinjam']; ?></td>
                 <td><?php echo $d['kd_buku']; ?></td>
                 <td><?php echo $d['judul_buku']; ?></td>
                 <td><?php echo $d['tgl_pinjam']; ?></td>
                 <td><?php echo $d['tgl_kembali']; ?></td>
-                <td>
-                    <a id="tombolDetail" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ubahModal<?php echo $d['kd_buku'] ?>">Lihat Detail</a>
+                <?php $status = $d['kembali'] ?>
+                <?php
+                if ($status == '1') {
+                    $status = 'belum dikembalikan';
+                } else if ($status == '2') {
+                    $status = 'sudah dikembalikan';
+                } ?>
+                <td><?php echo $status ?></td>
 
-                    <div class="modal fade" id="ubahModal<?php echo $d['kd_buku'] ?>" tabindex="-1">
+                <td>
+                    <a id="tombolDetail" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#lihatDetail<?php echo $d['id_pinjam'] ?>">Lihat Detail</a>
+
+                    <div class="modal fade" id="lihatDetail<?php echo $d['id_pinjam'] ?>" tabindex="-1">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Detail Buku</h5>
+                                    <h5 class="modal-title">Detail Peminjaman</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <form method="post" action="update_buku.php">
+                                        <label class="form-group">Id Peminjaman</label><br />
+                                        <input class="form-control" readonly name="kd_buku" value="<?php echo $d['id_pinjam']; ?>">
+
+                                        <br>
                                         <label class="form-group">Kode Buku</label><br />
                                         <input class="form-control" readonly name="kd_buku" value="<?php echo $d['kd_buku']; ?>">
 
@@ -61,23 +79,20 @@
 
                                         <br>
 
-                                        <label class="form-group">Pengarang</label><br />
-                                        <input class="form-control" type="text" name="pengarang" value="<?php echo $d['pengarang']; ?>" readonly>
+                                        <label class="form-group">Tanggal Pinjam</label><br />
+                                        <input class="form-control" type="date" name="judul_buku" value="<?php echo $d['tgl_pinjam']; ?>" readonly>
 
                                         <br>
 
-                                        <label class="form-group">Kategori Buku</label><br />
-                                        <input class="form-control" type="text" name="pengarang" value="<?php echo $d['nama_kategori']; ?>" readonly>
+                                        <label class="form-group">Tanggal Kembali</label><br />
+                                        <input class="form-control" type="date" name="judul_buku" value="<?php echo $d['tgl_kembali']; ?>" readonly>
 
                                         <br>
 
-                                        <label class="form-group">penerbit</label><br />
-                                        <input class="form-control" type="text" name="penerbit" value="<?php echo $d['penerbit']; ?>" readonly>
+                                        <label class="form-group">Status Peminjaman</label><br />
+                                        <input class="form-control" type="text" name="judul_buku" value="<?php echo $status ?>" readonly>
 
                                         <br>
-
-                                        <label class="form-group">Rak</label><br />
-                                        <input class="form-control" type="text" name="pengarang" value="<?php echo $d['nama_rak']; ?>" readonly>
 
                                     </form>
                                 </div>

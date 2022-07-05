@@ -50,9 +50,9 @@
                                         <option value="">---Pilih Nama Anggota---</option>
                                         <?php
                                         include('koneksi.php');
-                                        $anggota = mysqli_query($koneksi, "select * from anggota order by id_anggota");
+                                        $anggota = mysqli_query($koneksi, "select * from user where level='user' && status='aktif'");
                                         while ($a = mysqli_fetch_array($anggota)) {
-                                            echo "<option value='" . $a['id_anggota'] . "'>" . $a['nm_anggota'] . "</option>";
+                                            echo "<option value='" . $a['id_user'] . "'>" . $a['nama_lengkap'] . "</option>";
                                         }
                                         ?>
                                     </select>
@@ -71,9 +71,10 @@
                                         ?>
                                     </select>
                                     <br>
-
-                                    <input class="btn btn-success my-3" type="submit" value="Simpan">
-                                    <a href="pinjam_buku.php" class="btn btn-outline-danger">Batal</a>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
                                 </form>
 
                             </div>
@@ -110,9 +111,9 @@
             $cari = $_GET['cari'];
             $data = mysqli_query($koneksi, "select * from meminjam where tgl_pinjam like '%" . $cari . "%'");
         } else {
-            $data = mysqli_query($koneksi, "select meminjam.id_pinjam,meminjam.tgl_pinjam,meminjam.tgl_kembali,anggota.nm_anggota,meminjam.kd_buku,buku.judul_buku
+            $data = mysqli_query($koneksi, "select meminjam.id_pinjam,meminjam.tgl_pinjam,meminjam.tgl_kembali,user.nama_lengkap,meminjam.kd_buku,buku.judul_buku
             from meminjam
-           inner join anggota on meminjam.id_anggota = anggota.id_anggota
+           inner join user on meminjam.id_user = user.id_user
            inner join buku on meminjam.kd_buku = buku.kd_buku
            where kembali = '1'");
         }
@@ -124,12 +125,12 @@
                 <td><?php echo $d['id_pinjam']; ?></td>
                 <td><?php echo $d['tgl_pinjam']; ?></td>
                 <td><?php echo $d['tgl_kembali']; ?></td>
-                <td><?php echo $d['nm_anggota']; ?></td>
+                <td><?php echo $d['nama_lengkap']; ?></td>
                 <td><?php echo $d['judul_buku']; ?></td>
                 <td>
-                    <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ubahModal">Ubah Modal</a>
+                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ubahModal">Ubah</a>
                     |
-                    <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#kembaliModal<?php echo $d['id_pinjam']; ?>">Kembalikan Buku</a>
+                    <a class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#kembaliModal<?php echo $d['id_pinjam']; ?>">Kembalikan Buku</a>
                     <div class="modal fade" id="kembaliModal<?php echo $d['id_pinjam']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -155,7 +156,7 @@
                                         <br>
 
                                         <label class="form-group">Nama Peminjam</label>
-                                        <input class="form-control" type="text" name="nama_peminjam" value="<?php echo $d['nm_anggota'] ?>">
+                                        <input class="form-control" type="text" name="nama_peminjam" value="<?php echo $d['nama_lengkap'] ?>">
 
 
                                         <br>
@@ -173,8 +174,10 @@
 
                                         <br>
 
-                                        <input class="btn btn-success my-3" type="submit" value="Simpan">
-                                        <a href="pinjam_buku.php" class="btn btn-outline-danger">Batal</a>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                            <button type="submit" class="btn btn-primary">Kembalikan</button>
+                                        </div>
                                     </form>
 
                                 </div>
