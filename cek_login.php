@@ -3,24 +3,24 @@ require 'koneksi.php';
 
 session_start();
 
-$nomer_induk = $_POST['nomer_induk'];
-$password = $_POST['password'];
-
-$sql = mysqli_query($koneksi, "select * from user where nomer_induk = '$nomer_induk' and password = '$password' ");
+$nomor_induk = $_POST['nomor_induk'];
+$password = md5($_POST['password']);
+$sql = mysqli_query($koneksi, "select * from user where nomor_induk = '$nomor_induk'");
 
 $cek = mysqli_num_rows($sql);
-if ($cek > 0) {
+if ($cek != 0) {
     $data = mysqli_fetch_assoc($sql);
-
-    if ($data['level'] == "admin") {
-        $_SESSION['user'] = $data['nomer_induk'];
-        $_SESSION['level'] = "admin";
-        header("location:index.php");
-    } else if ($data['level'] == "user") {
-        $_SESSION['user'] = $data['nomer_induk'];
-        $_SESSION['level'] = "user";
-        header("location:user/index.php");
+    if ($password == $data['password'] && $data['level'] == 'admin') {
+        $_SESSION['nama_lengkap'] = $data['nama_lengkap'];
+        $_SESSION['nomor_induk'] = $data['nomor_induk'];
+        header("location:index.php?pesan=berhasil");
+    } else if ($password == $data['password'] && $data['level'] == 'user') {
+        $_SESSION['nama_lengkap'] = $data['nama_lengkap'];
+        $_SESSION['nomor_induk'] = $data['nomor_induk'];
+        header("location:user/index.php?pesan=berhasil");
     } else {
-        header("location:login.php?alert=gagal");
+        header("location:login.php?pesan=gagal");
     }
+} else {
+    header("location:login.php?pesan=gagal");
 }

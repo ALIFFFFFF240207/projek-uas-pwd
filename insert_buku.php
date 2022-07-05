@@ -9,6 +9,6 @@ $penerbit = $_POST['penerbit'];
 $kategori = $_POST['kategori'];
 $rak = $_POST['rak'];
 
-mysqli_query($koneksi, "insert into buku values('$kd_buku','$judul_buku','$pengarang','$kategori','$penerbit','$rak')");
+mysqli_query($koneksi, "insert into buku values('$kd_buku','$judul_buku','$pengarang','$kategori','$penerbit','$rak','2')");
 
 header("location:rak_buku.php");

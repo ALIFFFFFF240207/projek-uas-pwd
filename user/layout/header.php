@@ -26,17 +26,10 @@
                             <a href="about.php" class="nav-link px-0 align-middle text-white">
                                 <i class="bi bi-exclamation-circle-fill"></i> <span class="ms-1 d-none d-sm-inline">About</span> </a>
                         </li>
+                        <li>
+                            <a href="../login.php" class="nav-link px-0 align-middle text-white">
+                                <i class="fs-4 bi bi-door-open"></i> <span class="ms-1 d-none d-sm-inline">Sign-out</span> </a>
+                        </li>
                     </ul>
-                    <hr>
-                    <div class="dropdown pb-4">
-                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="assets/user.jpg" alt="hugenerd" width="40px" class="rounded-circle">
-                            <span class="d-none d-sm-inline mx-1">20410100062</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-
-                            <li><a class="dropdown-item" href="../login.php">Sign out</a></li>
-                        </ul>
-                    </div>
                 </div>
             </div>

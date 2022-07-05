@@ -50,9 +50,9 @@
                                         <option value="">---Pilih Nama Anggota---</option>
                                         <?php
                                         include('koneksi.php');
-                                        $data = mysqli_query($koneksi, "select * from anggota order by id_anggota");
-                                        while ($d = mysqli_fetch_array($data)) {
-                                            echo "<option value='" . $d['id_anggota'] . "'>" . $d['nm_anggota'] . "</option>";
+                                        $anggota = mysqli_query($koneksi, "select * from anggota order by id_anggota");
+                                        while ($a = mysqli_fetch_array($anggota)) {
+                                            echo "<option value='" . $a['id_anggota'] . "'>" . $a['nm_anggota'] . "</option>";
                                         }
                                         ?>
                                     </select>
@@ -64,9 +64,9 @@
                                         <option value="">---Pilih Judul Buku---</option>
                                         <?php
                                         include('koneksi.php');
-                                        $data = mysqli_query($koneksi, "select * from buku order by kd_buku");
-                                        while ($d = mysqli_fetch_array($data)) {
-                                            echo "<option value='" . $d['kd_buku'] . "'>" . $d['judul_buku'] . "</option>";
+                                        $buku = mysqli_query($koneksi, "select * from buku where status_buku='2'");
+                                        while ($b = mysqli_fetch_array($buku)) {
+                                            echo "<option value='" . $b['kd_buku'] . "'>" . $b['judul_buku'] . "</option>";
                                         }
                                         ?>
                                     </select>
@@ -110,7 +110,7 @@
             $cari = $_GET['cari'];
             $data = mysqli_query($koneksi, "select * from meminjam where tgl_pinjam like '%" . $cari . "%'");
         } else {
-            $data = mysqli_query($koneksi, "select meminjam.id_pinjam,meminjam.tgl_pinjam,meminjam.tgl_kembali,anggota.nm_anggota,buku.judul_buku
+            $data = mysqli_query($koneksi, "select meminjam.id_pinjam,meminjam.tgl_pinjam,meminjam.tgl_kembali,anggota.nm_anggota,meminjam.kd_buku,buku.judul_buku
             from meminjam
            inner join anggota on meminjam.id_anggota = anggota.id_anggota
            inner join buku on meminjam.kd_buku = buku.kd_buku
@@ -127,10 +127,60 @@
                 <td><?php echo $d['nm_anggota']; ?></td>
                 <td><?php echo $d['judul_buku']; ?></td>
                 <td>
-                    <a class="btn btn-primary" href="edit_anggota.php?id=<?php echo $d['id_pinjam']; ?>">Ubah</a>
+                    <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ubahModal">Ubah Modal</a>
                     |
-                    <a class="btn btn-outline-success" href="kembali.php?id=<?php echo $d['id_pinjam']; ?>">Kembalikan</a>
+                    <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#kembaliModal<?php echo $d['id_pinjam']; ?>">Kembalikan Buku</a>
+                    <div class="modal fade" id="kembaliModal<?php echo $d['id_pinjam']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Form Pengembalian Buku</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" action="kembali.php">
+                                        <label class="form-group">ID Pinjam</label><br />
+                                        <input class="form-control" type="text" name="id_pinjam" value="<?php echo $d['id_pinjam'] ?>" readonly>
 
+                                        <br>
+
+                                        <label class="form-group">Tanggal Pinjam</label><br />
+                                        <input class="form-control" type="date" name="tgl_pinjam" id="datePicker" value="<?php echo $d['tgl_pinjam'] ?>">
+
+                                        <br>
+
+                                        <label class="form-group">Tanggal Pinjam</label><br />
+                                        <input class="form-control" type="date" name="tgl_kembali" id="datePicker" value="">
+
+                                        <br>
+
+                                        <label class="form-group">Nama Peminjam</label>
+                                        <input class="form-control" type="text" name="nama_peminjam" value="<?php echo $d['nm_anggota'] ?>">
+
+
+                                        <br>
+
+                                        <label class="form-group">Judul Buku</label>
+                                        <input class="form-control" type="hidden" name="kd_buku" value="<?php echo $d['kd_buku'] ?>">
+                                        <input class="form-control" type="text" name="judul_buku" value="<?php echo $d['judul_buku'] ?>">
+
+
+                                        <!-- <br>
+
+                                        <label class="form-group">Denda</label>
+                                        <input class="form-control" type="text" name="nama_peminjam" required="required" value="<?php echo $d['judul_buku'] ?>"> -->
+
+
+                                        <br>
+
+                                        <input class="btn btn-success my-3" type="submit" value="Simpan">
+                                        <a href="pinjam_buku.php" class="btn btn-outline-danger">Batal</a>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
 

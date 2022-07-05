@@ -15,6 +15,7 @@
         <div class="row">
             <div class="col">
                 <h1>Nama User</h1>
+                <p></p>
             </div>
         </div>
     </div>
