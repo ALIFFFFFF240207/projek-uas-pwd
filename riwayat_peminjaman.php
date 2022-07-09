@@ -12,7 +12,52 @@
 <?php include('layout/header.php') ?>
 <div class="col-10 container">
     <h1>Daftar Riwayat Peminjaman Buku</h1>
+    <script>
+        $(document).ready(function() {
+
+            // From datepicker
+            $("#from_date").datepicker({
+                dateFormat: 'mm/dd/yyyy',
+                changeYear: true,
+                onSelect: function(selected) {
+                    var dt = new Date(selected);
+                    dt.setDate(dt.getDate() + 1);
+                    $("#to_date").datepicker("option", "minDate", dt);
+                }
+            });
+
+            // To datepicker
+            $("#to_date").datepicker({
+                dateFormat: 'mm/dd/yyyy',
+                changeYear: true,
+                onSelect: function(selected) {
+                    var dt = new Date(selected);
+                    dt.setDate(dt.getDate() - 1);
+                    $("#from_date").datepicker("option", "maxDate", dt);
+                }
+            });
+        });
+    </script>
+
+
     <table border="2" class="table">
+        <div class="row">
+            <div class="col-5">
+
+            </div>
+            <div class="col-2">
+
+            </div>
+            <div class="col-5">
+                <form action="rak_buku.php" method="get">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="cari"><i class="bi bi-search"></i></span>
+                        <input type="text" class="form-control" placeholder="cari judul buku" name="cari">
+                        <button class="btn btn-primary" type="submit" value="cari">Cari</button>
+                    </div>
+                </form>
+            </div>
+        </div>
         <tr class="text-center">
             <th>No.</th>
             <th>Id Pinjam</th>
@@ -49,6 +94,28 @@
         }
         ?>
     </table>
+    <div class="row justify-content-start">
+        <div class="col-8">
+            <form method="post" action="print.php">
+
+                <!-- DatePicker -->
+                <div class="input-group">
+                    <div class="col-4 ">
+                        <input type="date" class="datepicker form-control" placeholder="Dari Tanggal" name="from_date" id='from_date'>
+                    </div>
+                    <div class="col-4 mx-3">
+                        <input type="date" class="datepicker form-control" placeholder="Sampai Tanggal" name="to_date" id='to_date'>
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-primary" name="export" type="submit"><i class="bi bi-file-earmark-spreadsheet-fill"> Export </i></button>
+                    </div>
+                </div>
+
+
+
+            </form>
+        </div>
+    </div>
 </div>
 
 <?php include('layout/footer.php') ?>

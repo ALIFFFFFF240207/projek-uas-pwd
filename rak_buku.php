@@ -81,6 +81,7 @@
 
                                     <label class="form-group">penerbit</label><br />
                                     <input class="form-control" type="text" name="penerbit" required="required">
+
                                     <div class="modal-footer">
 
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>

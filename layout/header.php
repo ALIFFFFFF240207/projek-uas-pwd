@@ -40,7 +40,7 @@
                                 <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Anggota</span></a>
                         </li>
                         <li>
-                            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
+                            <a href="laporan.php" class="nav-link px-0 align-middle text-white">
                                 <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Laporan</span> </a>
                         </li>
                         <li>

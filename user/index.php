@@ -34,7 +34,7 @@ if (isset($_GET['pesan'])) {
     <table border="2" class="table">
         <div class="row justify-content-end">
             <div class="col-5">
-                <form action="rak_buku.php" method="get">
+                <form action="index.php" method="get">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="cari"><i class="bi bi-search"></i></span>
                         <input type="text" class="form-control" placeholder="cari judul buku" name="cari">
@@ -45,12 +45,12 @@ if (isset($_GET['pesan'])) {
         </div>
         <tr class="text-center">
             <th>No.</th>
-            <th>Kode Buku</th>
+
             <th>Judul Buku</th>
             <th>Pengarang</th>
             <th>Kategori Buku</th>
             <th>Penerbit</th>
-            <th>Rak</th>
+
             <th>Aksi</th>
         </tr>
         <?php
@@ -58,7 +58,9 @@ if (isset($_GET['pesan'])) {
         if (isset($_GET['cari'])) {
             $cari = $_GET['cari'];
 
-            $data = mysqli_query($koneksi, "select * from buku where judul_buku like '%" . $cari . "%'");
+            $data = mysqli_query($koneksi, "select buku.kd_buku, buku.judul_buku, buku.pengarang, buku.kategori ,kategori.nama_kategori, buku.penerbit, buku.rak, rak.nama_rak from buku
+            inner join kategori on buku.kategori = kategori.id_kategori
+            inner join rak on buku.rak = rak.id_rak where judul_buku like '%" . $cari . "%'");
         } else {
             $data = mysqli_query($koneksi, "select buku.kd_buku, buku.judul_buku, buku.pengarang, buku.kategori ,kategori.nama_kategori, buku.penerbit, buku.rak, rak.nama_rak from buku
             inner join kategori on buku.kategori = kategori.id_kategori
@@ -74,7 +76,7 @@ if (isset($_GET['pesan'])) {
                 <td><?php echo $d['pengarang']; ?></td>
                 <td><?php echo $d['nama_kategori']; ?></td>
                 <td><?php echo $d['penerbit']; ?></td>
-                <td><?php echo $d['nama_rak']; ?></td>
+
                 <td>
                     <a id="tombolDetail" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ubahModal<?php echo $d['kd_buku'] ?>">Lihat Detail</a>
 
