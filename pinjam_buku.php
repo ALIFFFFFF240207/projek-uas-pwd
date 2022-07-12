@@ -98,7 +98,6 @@
             <th>No.</th>
             <th>Id Pinjam</th>
             <th>Tanggal Pinjam</th>
-            <th>Tanggal Kembali</th>
             <th>Nama Peminjam</th>
             <th>Judul Buku</th>
             <th>Aksi</th>
@@ -124,7 +123,6 @@
                 <td><?php echo $no++; ?></td>
                 <td><?php echo $d['id_pinjam']; ?></td>
                 <td><?php echo $d['tgl_pinjam']; ?></td>
-                <td><?php echo $d['tgl_kembali']; ?></td>
                 <td><?php echo $d['nama_lengkap']; ?></td>
                 <td><?php echo $d['judul_buku']; ?></td>
                 <td>
@@ -150,7 +148,7 @@
 
                                         <br>
 
-                                        <label class="form-group">Tanggal Pinjam</label><br />
+                                        <label class="form-group">Tanggal Kembali</label><br />
                                         <input class="form-control" type="date" name="tgl_kembali" id="datePicker" value="">
 
                                         <br>
