@@ -1,13 +1,12 @@
 <?php
 include 'koneksi.php';
 
-$id_anggota = $_POST['id_anggota'];
-$nm_anggota = $_POST['nm_anggota'];
+$id_user = $_POST['id_user'];
+$nama_lengkap = $_POST['nama_lengkap'];
 $alamat = $_POST['alamat'];
-$tgl_lahir = $_POST['tgl_lahir'];
 $tgl_daftar = $_POST['tgl_daftar'];
-$sts_anggota = $_POST['sts_anggota'];
+$status = $_POST['status'];
 
-mysqli_query($koneksi, "update anggota set nm_anggota='$nm_anggota',alamat='$alamat',tgl_lahir='$tgl_lahir',tgl_daftar='$tgl_daftar',sts_anggota='$sts_anggota' where id_anggota='$id_anggota'");
+mysqli_query($koneksi, "update user set nama_lengkap='$nama_lengkap',alamat='$alamat',tgl_daftar='$tgl_daftar',status='$status' where id_user='$id_user'");
 
 header("location:anggota.php");

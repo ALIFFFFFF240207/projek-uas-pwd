@@ -97,7 +97,9 @@
     <div class="row justify-content-start">
         <div class="col-8">
             <form method="post" action="print.php">
-
+                <br>
+                <h2>Cetak Riwayat Peminjaman Buku</h2>
+                <br>
                 <!-- DatePicker -->
                 <div class="input-group">
                     <div class="col-4 ">
