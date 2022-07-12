@@ -39,10 +39,7 @@
                             <a href="anggota.php" class="nav-link px-0 align-middle text-white">
                                 <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Anggota</span></a>
                         </li>
-                        <li>
-                            <a href="laporan.php" class="nav-link px-0 align-middle text-white">
-                                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Laporan</span> </a>
-                        </li>
+                        
                         <li>
                             <a href="logout.php" class="nav-link px-0 align-middle text-white">
                                 <i class="fs-4 bi bi-door-open"></i> <span class="ms-1 d-none d-sm-inline">Sign-out</span> </a>
