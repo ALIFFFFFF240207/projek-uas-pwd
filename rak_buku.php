@@ -230,6 +230,7 @@
         <?php
         }
         ?>
+        <!-- Pagenation -->
         <tbody>
             <?php
             $batas = 5;
