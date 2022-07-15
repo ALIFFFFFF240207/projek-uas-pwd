@@ -9,7 +9,6 @@ $password =  md5($_POST['password']);
 $tgl = date("Y-m-d");
 $level = 'user';
 $status = 'aktif';
-$error = '';
 
 mysqli_query($koneksi, "insert into user values('$id_user','$nomor_induk','$nama_lengkap','$alamat','$password','$level','$status','$tgl')");
 

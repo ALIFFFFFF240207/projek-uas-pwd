@@ -120,7 +120,9 @@
         include 'koneksi.php';
         if (isset($_GET['cari'])) {
             $cari = $_GET['cari'];
-            $data = mysqli_query($koneksi, "select * from buku where judul_buku like '%" . $cari . "%'");
+            $data = mysqli_query($koneksi, "select buku.kd_buku, buku.judul_buku, buku.pengarang, buku.kategori ,kategori.nama_kategori, buku.penerbit, buku.rak, rak.nama_rak from buku
+            inner join kategori on buku.kategori = kategori.id_kategori
+            inner join rak on buku.rak = rak.id_rak where judul_buku like '%" . $cari . "%'");
         } else {
             $data = mysqli_query($koneksi, "select buku.kd_buku, buku.judul_buku, buku.pengarang, buku.kategori ,kategori.nama_kategori, buku.penerbit, buku.rak, rak.nama_rak from buku
             inner join kategori on buku.kategori = kategori.id_kategori
