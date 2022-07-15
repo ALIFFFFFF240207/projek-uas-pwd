@@ -85,7 +85,7 @@
             <div class="col-2">
             </div>
             <div class="col-5">
-                <form action="anggota.php" method="get">
+                <form action="pinjam_buku.php" method="get">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="cari"><i class="bi bi-search"></i></span>
                         <input type="date" class="form-control" name="cari">
