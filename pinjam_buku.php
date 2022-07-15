@@ -126,8 +126,7 @@
                 <td><?php echo $d['nama_lengkap']; ?></td>
                 <td><?php echo $d['judul_buku']; ?></td>
                 <td>
-                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ubahModal">Ubah</a>
-                    |
+
                     <a class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#kembaliModal<?php echo $d['id_pinjam']; ?>">Kembalikan Buku</a>
                     <div class="modal fade" id="kembaliModal<?php echo $d['id_pinjam']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
