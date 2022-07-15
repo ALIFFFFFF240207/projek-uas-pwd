@@ -100,7 +100,7 @@
                 <form action="rak_buku.php" method="get">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="cari"><i class="bi bi-search"></i></span>
-                        <input type="text" class="form-control" placeholder="cari judul buku" name="cari">
+                        <input type="text" class="form-control" placeholder="Cari Judul Buku" name="cari">
                         <button class="btn btn-primary" type="submit" value="cari">Cari</button>
                     </div>
                 </form>
