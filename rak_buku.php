@@ -195,38 +195,10 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
         </div>
         </td>
         </tr>
         <tbody style="text-align: center;">
-=======
-            <div class="modal fade" id="hapusModal<?php echo $d['kd_buku'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Hapus Data</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Apakah anda yakin ingin menghapus <?php echo $d['judul_buku'] ?> ?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <a href="delete_buku.php?id=<?php echo $d['kd_buku']; ?>" class="btn tombolHapus btn-outline-danger">Hapus</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </td>
-            </tr>
-
-        <?php
-        }
-        ?>
-        <!-- Pagenation -->
-        <tbody>
->>>>>>> 6a9027a5c64d2d9c85919e68c407bf0e113a1bc2
             <?php
             $batas = 5;
             $halaman = isset($_GET['halaman']) ? (int)$_GET['halaman'] : 1;
