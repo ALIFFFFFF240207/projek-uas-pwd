@@ -34,7 +34,7 @@
             </script>
         <?php } ?>
     <?php } ?>
-    <div class="row mt-5 ms-4 text-white">
+    <div class="row mt-5 mx-5 text-white justify-content-between">
         <div class="col-3 bg-danger rounded p-4">
             <?php
             include('koneksi.php');
