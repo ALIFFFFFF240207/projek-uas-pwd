@@ -84,7 +84,6 @@
             </div>
             <div class="col-2">
             </div>
-
         </div>
         <tr class="text-center">
             <th>No.</th>

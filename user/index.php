@@ -37,7 +37,7 @@ if (isset($_GET['pesan'])) {
                 <form action="index.php" method="get">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="cari"><i class="bi bi-search"></i></span>
-                        <input type="text" class="form-control" placeholder="cari judul buku" name="cari">
+                        <input type="text" class="form-control" placeholder="Cari Judul Buku" name="cari">
                         <button class="btn btn-primary" type="submit" value="cari">Cari</button>
                     </div>
                 </form>
@@ -45,7 +45,7 @@ if (isset($_GET['pesan'])) {
         </div>
         <tr class="text-center">
             <th>No.</th>
-
+            <th>Kode Buku</th>
             <th>Judul Buku</th>
             <th>Pengarang</th>
             <th>Kategori Buku</th>
@@ -69,7 +69,7 @@ if (isset($_GET['pesan'])) {
         $no = 1;
         while ($d = mysqli_fetch_array($data)) {
         ?>
-            <tr class="text-center">
+            <!-- <tr class="text-center">
                 <td><?php echo $no++; ?></td>
                 <td><?php echo $d['kd_buku']; ?></td>
                 <td><?php echo $d['judul_buku']; ?></td>
@@ -78,58 +78,120 @@ if (isset($_GET['pesan'])) {
                 <td><?php echo $d['penerbit']; ?></td>
 
                 <td>
-                    <a id="tombolDetail" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ubahModal<?php echo $d['kd_buku'] ?>">Lihat Detail</a>
+                    <a id="tombolDetail" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ubahModal<?php echo $d['kd_buku'] ?>">Lihat Detail</a> -->
 
-                    <div class="modal fade" id="ubahModal<?php echo $d['kd_buku'] ?>" tabindex="-1">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Detail Buku</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form method="post" action="update_buku.php">
-                                        <label class="form-group">Kode Buku</label><br />
-                                        <input class="form-control" readonly name="kd_buku" value="<?php echo $d['kd_buku']; ?>">
-
-                                        <br>
-
-                                        <label class="form-group">Judul Buku</label><br />
-                                        <input class="form-control" type="text" name="judul_buku" value="<?php echo $d['judul_buku']; ?>" readonly>
-
-                                        <br>
-
-                                        <label class="form-group">Pengarang</label><br />
-                                        <input class="form-control" type="text" name="pengarang" value="<?php echo $d['pengarang']; ?>" readonly>
-
-                                        <br>
-
-                                        <label class="form-group">Kategori Buku</label><br />
-                                        <input class="form-control" type="text" name="pengarang" value="<?php echo $d['nama_kategori']; ?>" readonly>
-
-                                        <br>
-
-                                        <label class="form-group">penerbit</label><br />
-                                        <input class="form-control" type="text" name="penerbit" value="<?php echo $d['penerbit']; ?>" readonly>
-
-                                        <br>
-
-                                        <label class="form-group">Rak</label><br />
-                                        <input class="form-control" type="text" name="pengarang" value="<?php echo $d['nama_rak']; ?>" readonly>
-
-                                    </form>
-                                </div>
-
-                            </div>
+            <div class="modal fade" id="ubahModal<?php echo $d['kd_buku'] ?>" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Detail Buku</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+                        <div class="modal-body">
+                            <form method="post" action="update_buku.php">
+                                <label class="form-group">Kode Buku</label><br />
+                                <input class="form-control" readonly name="kd_buku" value="<?php echo $d['kd_buku']; ?>">
+
+                                <br>
+
+                                <label class="form-group">Judul Buku</label><br />
+                                <input class="form-control" type="text" name="judul_buku" value="<?php echo $d['judul_buku']; ?>" readonly>
+
+                                <br>
+
+                                <label class="form-group">Pengarang</label><br />
+                                <input class="form-control" type="text" name="pengarang" value="<?php echo $d['pengarang']; ?>" readonly>
+
+                                <br>
+
+                                <label class="form-group">Kategori Buku</label><br />
+                                <input class="form-control" type="text" name="pengarang" value="<?php echo $d['nama_kategori']; ?>" readonly>
+
+                                <br>
+
+                                <label class="form-group">penerbit</label><br />
+                                <input class="form-control" type="text" name="penerbit" value="<?php echo $d['penerbit']; ?>" readonly>
+
+                                <br>
+
+                                <label class="form-group">Rak</label><br />
+                                <input class="form-control" type="text" name="pengarang" value="<?php echo $d['nama_rak']; ?>" readonly>
+
+                            </form>
+                        </div>
+
                     </div>
-                </td>
-            </tr>
+                </div>
+            </div>
+            <!-- </td> -->
+            <!-- </tr> -->
 
         <?php
         }
         ?>
+        <!-- Pagenation -->
+        <tbody>
+            <?php
+            $batas = 5;
+            $halaman = isset($_GET['halaman']) ? (int)$_GET['halaman'] : 1;
+            $halaman_awal = ($halaman > 1) ? ($halaman * $batas) - $batas : 0;
+
+            $previous = $halaman - 1;
+            $next = $halaman + 1;
+
+            $data = mysqli_query($koneksi, "select buku.kd_buku, buku.judul_buku, buku.pengarang, buku.kategori ,kategori.nama_kategori, buku.penerbit, buku.rak, rak.nama_rak from buku
+            inner join kategori on buku.kategori = kategori.id_kategori
+            inner join rak on buku.rak = rak.id_rak");
+            $jumlah_data = mysqli_num_rows($data);
+            $total_halaman = ceil($jumlah_data / $batas);
+
+            $data_rak = mysqli_query($koneksi, "select buku.kd_buku, buku.judul_buku, buku.pengarang, buku.kategori ,kategori.nama_kategori, buku.penerbit, buku.rak, rak.nama_rak from buku
+            inner join kategori on buku.kategori = kategori.id_kategori
+            inner join rak on buku.rak = rak.id_rak limit $halaman_awal, $batas");
+            $nomor = $halaman_awal + 1;
+            while ($d = mysqli_fetch_array($data_rak)) {
+            ?>
+                <tr class="text-center">
+                    <td><?php echo $nomor++; ?></td>
+                    <td><?php echo $d['kd_buku']; ?></td>
+                    <td><?php echo $d['judul_buku']; ?></td>
+                    <td><?php echo $d['pengarang']; ?></td>
+                    <td><?php echo $d['nama_kategori']; ?></td>
+                    <td><?php echo $d['penerbit']; ?></td>
+
+                    <td>
+                        <a id="tombolDetail" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ubahModal<?php echo $d['kd_buku'] ?>">Lihat Detail</a>
+                    </td>
+                </tr>
+            <?php
+            }
+            ?>
+        </tbody>
     </table>
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" <?php if ($halaman > 1) {
+                                            echo "href='?halaman=$previous'";
+                                        } ?>>Previous
+                </a>
+            </li>
+            <?php
+            for ($x = 1; $x <= $total_halaman; $x++) {
+            ?>
+                <li class="page-item"><a class="page-link" href="?halaman=<?php echo $x ?>"><?php echo $x; ?></a></li>
+            <?php
+            }
+            ?>
+            <li class="page-item">
+                <a class="page-link" <?php if ($halaman < $total_halaman) {
+                                            echo "href='?halaman=$next'";
+                                        } ?>>Next
+                </a>
+            </li>
+        </ul>
+    </nav>
+
 </div>
 
 <?php include('layout/footer.php') ?>
