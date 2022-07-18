@@ -14,7 +14,7 @@
     <h1>Daftar Peminjaman Buku</h1>
     <table border="2" class="table">
         <div class="row">
-            <div class="col-5">
+            <div class="col-5 mb-3">
                 <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tambahModal">Peminjaman Buku</a>
                 <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -84,15 +84,7 @@
             </div>
             <div class="col-2">
             </div>
-            <div class="col-5">
-                <form action="anggota.php" method="get">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="cari"><i class="bi bi-search"></i></span>
-                        <input type="date" class="form-control" name="cari">
-                        <button class="btn btn-primary" type="submit" value="cari">Cari</button>
-                    </div>
-                </form>
-            </div>
+
         </div>
         <tr class="text-center">
             <th>No.</th>
@@ -103,92 +95,115 @@
             <th>Aksi</th>
         </tr>
 
+        <tbody style="text-align: center;">
+            <?php
+            include 'koneksi.php';
+            $batas = 5;
+            $halaman = isset($_GET['halaman']) ? (int)$_GET['halaman'] : 1;
+            $halaman_awal = ($halaman > 1) ? ($halaman * $batas) - $batas : 0;
 
-        <?php
-        include 'koneksi.php';
-        if (isset($_GET['cari'])) {
-            $cari = $_GET['cari'];
-            $data = mysqli_query($koneksi, "select * from meminjam where tgl_pinjam like '%" . $cari . "%'");
-        } else {
-            $data = mysqli_query($koneksi, "select meminjam.id_pinjam,meminjam.tgl_pinjam,meminjam.tgl_kembali,user.nama_lengkap,meminjam.kd_buku,buku.judul_buku
+            $previous = $halaman - 1;
+            $next = $halaman + 1;
+            $data = mysqli_query($koneksi, "select * from meminjam where kembali=1");
+            $jumlah_data = mysqli_num_rows($data);
+            $total_halaman = ceil($jumlah_data / $batas);
+            $data_rak = mysqli_query($koneksi, "select meminjam.id_pinjam,meminjam.tgl_pinjam,meminjam.tgl_kembali,user.nama_lengkap,meminjam.kd_buku,buku.judul_buku
             from meminjam
            inner join user on meminjam.id_user = user.id_user
            inner join buku on meminjam.kd_buku = buku.kd_buku
-           where kembali = '1'");
-        }
-        $no = 1;
-        while ($d = mysqli_fetch_array($data)) {
-        ?>
-            <tr class="text-center">
-                <td><?php echo $no++; ?></td>
-                <td><?php echo $d['id_pinjam']; ?></td>
-                <td><?php echo $d['tgl_pinjam']; ?></td>
-                <td><?php echo $d['nama_lengkap']; ?></td>
-                <td><?php echo $d['judul_buku']; ?></td>
-                <td>
-                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ubahModal">Ubah</a>
-                    |
-                    <a class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#kembaliModal<?php echo $d['id_pinjam']; ?>">Kembalikan Buku</a>
-                    <div class="modal fade" id="kembaliModal<?php echo $d['id_pinjam']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Form Pengembalian Buku</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form method="post" action="kembali.php">
-                                        <label class="form-group">ID Pinjam</label><br />
-                                        <input class="form-control" type="text" name="id_pinjam" value="<?php echo $d['id_pinjam'] ?>" readonly>
+           where kembali = '1' limit $halaman_awal, $batas");
+            $nomor = $halaman_awal + 1;
+            while ($d = mysqli_fetch_array($data_rak)) {
+            ?>
+                <tr>
+                    <td><?php echo $nomor++; ?></td>
+                    <td><?php echo $d['id_pinjam']; ?></td>
+                    <td><?php echo $d['tgl_pinjam']; ?></td>
+                    <td><?php echo $d['nama_lengkap']; ?></td>
+                    <td><?php echo $d['judul_buku']; ?></td>
+                    <td>
+                        <a id="tombolKembali" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#kembaliModal<?php echo $d['id_pinjam'] ?>">Kembalikan</a>
+                        <div class="modal fade" id="kembaliModal<?php echo $d['id_pinjam']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Form Pengembalian Buku</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="post" action="kembali.php">
+                                            <label class="form-group">ID Pinjam</label><br />
+                                            <input class="form-control" type="text" name="id_pinjam" value="<?php echo $d['id_pinjam'] ?>" readonly>
 
-                                        <br>
+                                            <br>
 
-                                        <label class="form-group">Tanggal Pinjam</label><br />
-                                        <input class="form-control" type="date" name="tgl_pinjam" id="datePicker" value="<?php echo $d['tgl_pinjam'] ?>">
+                                            <label class="form-group">Tanggal Pinjam</label><br />
+                                            <input class="form-control" type="date" name="tgl_pinjam" id="datePicker" value="<?php echo $d['tgl_pinjam'] ?>">
 
-                                        <br>
+                                            <br>
 
-                                        <label class="form-group">Tanggal Kembali</label><br />
-                                        <input class="form-control" type="date" name="tgl_kembali" id="datePicker" value="">
+                                            <label class="form-group">Tanggal Pinjam</label><br />
+                                            <input class="form-control" type="date" name="tgl_kembali" id="datePicker" value="">
 
-                                        <br>
+                                            <br>
 
-                                        <label class="form-group">Nama Peminjam</label>
-                                        <input class="form-control" type="text" name="nama_peminjam" value="<?php echo $d['nama_lengkap'] ?>">
+                                            <label class="form-group">Nama Peminjam</label>
+                                            <input class="form-control" type="text" name="nama_peminjam" value="<?php echo $d['nama_lengkap'] ?>">
 
 
-                                        <br>
+                                            <br>
 
-                                        <label class="form-group">Judul Buku</label>
-                                        <input class="form-control" type="hidden" name="kd_buku" value="<?php echo $d['kd_buku'] ?>">
-                                        <input class="form-control" type="text" name="judul_buku" value="<?php echo $d['judul_buku'] ?>">
-
-
-                                        <!-- <br>
-
-                                        <label class="form-group">Denda</label>
-                                        <input class="form-control" type="text" name="nama_peminjam" required="required" value="<?php echo $d['judul_buku'] ?>"> -->
+                                            <label class="form-group">Judul Buku</label>
+                                            <input class="form-control" type="hidden" name="kd_buku" value="<?php echo $d['kd_buku'] ?>">
+                                            <input class="form-control" type="text" name="judul_buku" value="<?php echo $d['judul_buku'] ?>">
 
 
-                                        <br>
+                                            <br>
 
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                            <button type="submit" class="btn btn-primary">Kembalikan</button>
-                                        </div>
-                                    </form>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                <button type="submit" class="btn btn-primary">Kembalikan</button>
+                                            </div>
+                                        </form>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </td>
-            </tr>
+                    </td>
 
-        <?php
-        }
-        ?>
+                </tr>
+            <?php
+            }
+            ?>
+
+        </tbody>
+
     </table>
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" <?php if ($halaman > 1) {
+                                            echo "href='?halaman=$previous'";
+                                        } ?>>Previous
+                </a>
+            </li>
+            <?php
+            for ($x = 1; $x <= $total_halaman; $x++) {
+            ?>
+                <li class="page-item"><a class="page-link" href="?halaman=<?php echo $x ?>"><?php echo $x; ?></a></li>
+            <?php
+            }
+            ?>
+            <li class="page-item">
+                <a class="page-link" <?php if ($halaman < $total_halaman) {
+                                            echo "href='?halaman=$next'";
+                                        } ?>>Next
+                </a>
+            </li>
+        </ul>
+    </nav>
+
 </div>
 
 <?php include('layout/footer.php') ?>
