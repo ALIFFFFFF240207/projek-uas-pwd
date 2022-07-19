@@ -53,7 +53,7 @@
             $data = mysqli_query($koneksi, "select * from user where level = 'user' && nama_lengkap like '%" . $cari . "%'");
             $jumlah_data = mysqli_num_rows($data);
             $total_halaman = ceil($jumlah_data / $batas);
-            $data_rak = mysqli_query($koneksi, "select * from user where nama_lengkap  like '%" . $cari . "%' limit $halaman_awal, $batas");
+            $data_rak = mysqli_query($koneksi, "select * from user where nama_lengkap  like '%" . $cari . "%' && level = 'user' limit $halaman_awal, $batas");
          } else {
             $data_rak = mysqli_query($koneksi, "select * from user where level = 'user' limit $halaman_awal, $batas");
          }
