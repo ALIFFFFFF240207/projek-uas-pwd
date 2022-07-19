@@ -1,5 +1,5 @@
 <?php
-include('koneksi.php');
+include('../koneksi.php');
 
 $tgl_kembali = $_POST['tgl_kembali'];
 $id_pinjam = $_POST['id_pinjam'];

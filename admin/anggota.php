@@ -37,7 +37,6 @@
       </tr>
       <tbody style="text-align: center;">
          <?php
-         include 'koneksi.php';
          $batas = 5;
          $halaman = isset($_GET['halaman']) ? (int)$_GET['halaman'] : 1;
          $halaman_awal = ($halaman > 1) ? ($halaman * $batas) - $batas : 0;
@@ -102,8 +101,13 @@
 
                                  <br>
 
+
                                  <label class="form-group">Status Anggota</label><br />
-                                 <input class="form-control" type="text" name="status" value="<?php echo $d['status']; ?>" readonly>
+                                 <select class="form-select dropdown-toggle" name="status" id="status">
+                                    <option selected><?php echo $d['status']; ?></option>
+                                    <option value="aktif">aktif</option>
+                                    <option value="tidak aktif">tidak aktif</option>
+                                 </select>
                                  <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                     <button type="submit" class="btn btn-primary">Ubah</button>

@@ -4,7 +4,7 @@
 </head>
 
 <body>
-
+    <?php include '../koneksi.php'; ?>
     <?php session_start(); ?>
     <div class="container-fluid">
         <div class="row">

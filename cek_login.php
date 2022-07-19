@@ -15,7 +15,7 @@ if ($cek != 0) {
         $_SESSION['nama_lengkap'] = $data['nama_lengkap'];
         $_SESSION['id_user'] = $data['id_user'];
         $_SESSION['level'] = $data['level'];
-        header("location:index.php?pesan=berhasil");
+        header("location:admin/index.php?pesan=berhasil");
     } else if ($password == $data['password'] && $data['level'] == 'user') {  //cek apakah level user adalah user ?
         $_SESSION['nama_lengkap'] = $data['nama_lengkap'];
         $_SESSION['id_user'] = $data['id_user'];

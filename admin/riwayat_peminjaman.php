@@ -63,7 +63,7 @@
         </tr>
         <tbody style="text-align: center;">
             <?php
-            include 'koneksi.php';
+
             $batas = 5;
             $halaman = isset($_GET['halaman']) ? (int)$_GET['halaman'] : 1;
             $halaman_awal = ($halaman > 1) ? ($halaman * $batas) - $batas : 0;

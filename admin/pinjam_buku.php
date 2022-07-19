@@ -25,7 +25,6 @@
                             </div>
                             <div class="modal-body">
                                 <?php
-                                include 'koneksi.php';
                                 $query = mysqli_query($koneksi, "select max(id_pinjam) as kodeTerbesar from meminjam");
                                 $data = mysqli_fetch_array($query);
                                 $kdPinjam = $data['kodeTerbesar'];
@@ -49,7 +48,7 @@
                                     <select class="form-control" name="anggota" id="anggota">
                                         <option value="">---Pilih Nama Anggota---</option>
                                         <?php
-                                        include('koneksi.php');
+
                                         $anggota = mysqli_query($koneksi, "select * from user where level='user' && status='aktif'");
                                         while ($a = mysqli_fetch_array($anggota)) {
                                             echo "<option value='" . $a['id_user'] . "'>" . $a['nama_lengkap'] . "</option>";
@@ -63,7 +62,7 @@
                                     <select class="form-control" name="buku" id="buku">
                                         <option value="">---Pilih Judul Buku---</option>
                                         <?php
-                                        include('koneksi.php');
+
                                         $buku = mysqli_query($koneksi, "select * from buku where status_buku='2'");
                                         while ($b = mysqli_fetch_array($buku)) {
                                             echo "<option value='" . $b['kd_buku'] . "'>" . $b['judul_buku'] . "</option>";
@@ -96,7 +95,6 @@
 
         <tbody style="text-align: center;">
             <?php
-            include 'koneksi.php';
             $batas = 5;
             $halaman = isset($_GET['halaman']) ? (int)$_GET['halaman'] : 1;
             $halaman_awal = ($halaman > 1) ? ($halaman * $batas) - $batas : 0;

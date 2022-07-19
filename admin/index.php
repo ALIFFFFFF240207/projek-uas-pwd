@@ -14,7 +14,6 @@
 </head>
 <?php include('layout/header.php') ?>
 
-
 <div class="col-10">
     <?php
 
@@ -34,10 +33,10 @@
             </script>
         <?php } ?>
     <?php } ?>
-    <div class="row mt-5 mx-5 text-white justify-content-between">
+    <div class="row mt-5 mx-2 text-white justify-content-between">
         <div class="col-3 bg-danger rounded p-4">
             <?php
-            include('koneksi.php');
+
             $result = mysqli_query($koneksi, "select count(*) as total_buku from buku");
             $data_buku = mysqli_fetch_assoc($result);
             ?>
@@ -53,7 +52,6 @@
         </div>
         <div class="col-3 bg-primary rounded p-4 mx-3">
             <?php
-            include('koneksi.php');
             $result = mysqli_query($koneksi, "select count(*) as total_anggota from user where level='user'");
             $data_anggota = mysqli_fetch_assoc($result);
             ?>
@@ -71,7 +69,6 @@
 
         <div class="col-3 bg-success rounded p-4">
             <?php
-            include('koneksi.php');
             $result = mysqli_query($koneksi, "select count(*) as total_pinjam from meminjam where kembali='1'");
             $data_pinjam = mysqli_fetch_assoc($result);
             ?>

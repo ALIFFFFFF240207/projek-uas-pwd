@@ -26,7 +26,6 @@
                             </div>
                             <div class="modal-body">
                                 <?php
-                                include 'koneksi.php';
                                 $query = mysqli_query($koneksi, "select max(kd_buku) as kodeTerbesar from buku");
                                 $data = mysqli_fetch_array($query);
                                 $kodeBuku = $data['kodeTerbesar'];
@@ -57,7 +56,7 @@
                                     <select class="form-select" name="kategori">
                                         <option selected>Pilih Kategori Buku</option>
                                         <?php
-                                        include 'koneksi.php';
+
                                         $data = mysqli_query($koneksi, "select * from kategori");
                                         while ($d = mysqli_fetch_array($data)) {
                                             echo "<option value='" . $d['id_kategori'] . "'>" . $d['nama_kategori'] . "</option>";
@@ -69,7 +68,7 @@
                                     <select class="form-select" name="rak">
                                         <option selected>Pilih Rak</option>
                                         <?php
-                                        include 'koneksi.php';
+
                                         $data = mysqli_query($koneksi, "select * from rak");
                                         while ($d = mysqli_fetch_array($data)) {
                                             echo "<option value='" . $d['id_rak'] . "'>" . $d['nama_rak'] . "</option>";
@@ -144,7 +143,7 @@
                             <select class="form-select" name="kategori">
                                 <option selected value="<?php echo $d['kategori']; ?>"><?php echo $d['nama_kategori']; ?></option>
                                 <?php
-                                include 'koneksi.php';
+
                                 $kategori = mysqli_query($koneksi, "select * from kategori");
                                 while ($k = mysqli_fetch_array($kategori)) {
                                     echo "<option value='" . $k['id_kategori'] . "'>" . $k['nama_kategori'] . "</option>";
@@ -162,7 +161,7 @@
                             <select class="form-select" name="rak">
                                 <option selected value="<?php echo $d['rak']; ?>"><?php echo $d['nama_rak']; ?></option>
                                 <?php
-                                include 'koneksi.php';
+
                                 $rak = mysqli_query($koneksi, "select * from rak");
                                 while ($r = mysqli_fetch_array($rak)) {
                                     echo "<option value='" . $r['id_rak'] . "'>" . $r['nama_rak'] . "</option>";
@@ -270,7 +269,7 @@
                                             <select class="form-select" name="kategori">
                                                 <option selected value="<?php echo $d['kategori']; ?>"><?php echo $d['nama_kategori']; ?></option>
                                                 <?php
-                                                include 'koneksi.php';
+
                                                 $kategori = mysqli_query($koneksi, "select * from kategori");
                                                 while ($k = mysqli_fetch_array($kategori)) {
                                                     echo "<option value='" . $k['id_kategori'] . "'>" . $k['nama_kategori'] . "</option>";
@@ -288,7 +287,7 @@
                                             <select class="form-select" name="rak">
                                                 <option selected value="<?php echo $d['rak']; ?>"><?php echo $d['nama_rak']; ?></option>
                                                 <?php
-                                                include 'koneksi.php';
+
                                                 $rak = mysqli_query($koneksi, "select * from rak");
                                                 while ($r = mysqli_fetch_array($rak)) {
                                                     echo "<option value='" . $r['id_rak'] . "'>" . $r['nama_rak'] . "</option>";
