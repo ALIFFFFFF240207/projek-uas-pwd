@@ -46,8 +46,10 @@
                         </li>
                     </ul>
                     <div class="dropdown pb-4">
-                        <span class="d-none d-sm-inline mx-1"><?php echo $_SESSION['level']; ?></span>
-                        <span class="d-none d-sm-inline mx-1"><?php echo $_SESSION['nama_lengkap']; ?></span>
+
+                        <b><span class="d-none d-sm-inline mx-1"><?php echo $_SESSION['nama_lengkap']; ?></span></b>
+                        <br>
+                        <p>anda login sebagai <b><span class="d-none d-sm-inline"><?php echo $_SESSION['level']; ?></span></b> </p>
                     </div>
                 </div>
             </div>

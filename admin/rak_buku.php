@@ -83,8 +83,8 @@
 
                                     <div class="modal-footer">
 
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                        <button type="submit" class="btn tombolSimpan btn-primary">Simpan</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn tombolSimpan btn-outline-success">Simpan</button>
                                     </div>
                                 </form>
 
@@ -96,7 +96,7 @@
             <div class="col-2">
             </div>
             <div class="col-5">
-                <form action="rak_buku.php" method="get">
+                <form action="rak_buku.php" method="get" autocomplete="off">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="cari"><i class="bi bi-search"></i></span>
                         <input type="text" class="form-control" placeholder="Cari Judul Buku" name="cari">
@@ -238,7 +238,7 @@
                     <td><?php echo $d['penerbit']; ?></td>
                     <td><?php echo $d['nama_rak']; ?></td>
                     <td>
-                        <a id="tombolUbah" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ubahModal<?php echo $d['kd_buku'] ?>">Ubah</a>
+                        <a id="tombolUbah" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ubahModal<?php echo $d['kd_buku'] ?>">Ubah</a>
                         |
                         <a id="tombolhapus" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#hapusModal<?php echo $d['kd_buku'] ?>">Hapus</a>
                         <div class="modal fade" id="ubahModal<?php echo $d['kd_buku'] ?>" tabindex="-1">
@@ -295,8 +295,8 @@
                                                 ?>
                                             </select>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                <button type="submit" class="btn btn-primary">Ubah</button>
+                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                                                <button type="submit" class="btn btn-outline-success">Ubah</button>
                                             </div>
                                         </form>
                                     </div>
@@ -315,7 +315,7 @@
                                         Apakah anda yakin ingin menghapus <?php echo $d['judul_buku'] ?> ?
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Batal</button>
                                         <a href="delete_buku.php?id=<?php echo $d['kd_buku']; ?>" class="btn tombolHapus btn-outline-danger">Hapus</a>
                                     </div>
                                 </div>

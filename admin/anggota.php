@@ -16,7 +16,7 @@
    <table border="2" class="table">
       <div class="row justify-content-end">
          <div class="col-5">
-            <form action="anggota.php" method="get">
+            <form action="anggota.php" method="get" autocomplete="off">
                <div class="input-group mb-3">
                   <span class="input-group-text" id="cari"><i class="bi bi-search"></i></span>
                   <input type="text" class="form-control" placeholder="cari nama anggota" name="cari">
@@ -68,7 +68,7 @@
                <td><?php echo $d['tgl_daftar']; ?></td>
                <td><?php echo $d['status']; ?></td>
                <td>
-                  <a id="tombolUbah" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ubahModal<?php echo $d['id_user'] ?>">Ubah</a>
+                  <a id="tombolUbah" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ubahModal<?php echo $d['id_user'] ?>">Ubah</a>
                   |
                   <a id="tombolhapus" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#hapusModal<?php echo $d['id_user'] ?>">Hapus</a>
 
@@ -109,8 +109,8 @@
                                     <option value="tidak aktif">tidak aktif</option>
                                  </select>
                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                    <button type="submit" class="btn btn-primary">Ubah</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                                    <button type="submit" class="btn btn-outline-success">Ubah</button>
                                  </div>
                               </form>
 
@@ -130,7 +130,7 @@
                               Apakah anda yakin ingin menghapus <?php echo $d['nama_lengkap'] ?> ?
                            </div>
                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                              <button type="button" class="btn btn-success" data-bs-dismiss="modal">Batal</button>
                               <a href="delete_anggota.php?id=<?php echo $d['id_user']; ?>" class="btn btn-outline-danger">Hapus</a>
                            </div>
                         </div>

@@ -71,8 +71,8 @@
                                     </select>
                                     <br>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-outline-success">Simpan</button>
                                     </div>
                                 </form>
 
@@ -158,8 +158,8 @@
                                             <br>
 
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                <button type="submit" class="btn btn-primary">Kembalikan</button>
+                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                                                <button type="submit" class="btn btn-outline-success">Kembalikan</button>
                                             </div>
                                         </form>
 

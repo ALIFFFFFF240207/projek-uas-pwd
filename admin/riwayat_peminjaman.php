@@ -129,15 +129,15 @@
                 <div class="modal-body">
                     <form method="post" action="export.php">
                         <!-- DatePicker -->
-                        <div class="input-group my-4">
+                        <div class="input-group">
                             <label for="dari" class="input-group"> Dari Tanggal </label>
                             <input type="date" class="datepicker form-control mb-3" placeholder="Dari Tanggal" name="from_date" id='from_date'>
                             <label for="dari" class="input-group"> Sampai Tanggal </label>
                             <input type="date" class="datepicker form-control " placeholder="Sampai Tanggal" name="to_date" id='to_date'>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button class="btn btn-primary" name="export" type="submit"><i class="bi bi-file-earmark-spreadsheet-fill"> Export </i></button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                            <button class="btn btn-outline-success" name="export" type="submit"><i class="bi bi-file-earmark-spreadsheet-fill"> Export </i></button>
 
                         </div>
                     </form>

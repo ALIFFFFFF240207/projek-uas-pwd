@@ -97,7 +97,48 @@ if (isset($_GET['pesan'])) {
                     <td><?php echo $d['penerbit']; ?></td>
 
                     <td>
-                        <a id="tombolDetail" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ubahModal<?php echo $d['kd_buku'] ?>">Lihat Detail</a>
+                        <a id="tombolDetail" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal<?php echo $d['kd_buku'] ?>">Lihat Detail</a>
+                        <div class="modal fade" id="detailModal<?php echo $d['kd_buku'] ?>" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Form Ubah Data Buku</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <label class="form-group">Kode Buku</label><br />
+                                        <input class="form-control" readonly name="kd_buku" value="<?php echo $d['kd_buku']; ?>">
+
+                                        <br>
+
+                                        <label class="form-group">Judul Buku</label><br />
+                                        <input class="form-control" readonly type="text" name="judul_buku" value="<?php echo $d['judul_buku']; ?>">
+
+                                        <br>
+
+                                        <label class="form-group">Pengarang</label><br />
+                                        <input class="form-control" readonly type="text" name="pengarang" value="<?php echo $d['pengarang']; ?>">
+
+                                        <br>
+
+                                        <label class="form-group">Kategori Buku</label><br />
+                                        <input class="form-control" readonly type="text" name="penerbit" value="<?php echo $d['nama_kategori']; ?>">
+
+                                        <br>
+
+                                        <label class="form-group">penerbit</label><br />
+                                        <input class="form-control" readonly type="text" name="penerbit" value="<?php echo $d['penerbit']; ?>">
+
+                                        <br>
+
+                                        <label class="form-group">Rak</label><br />
+                                        <input class="form-control" readonly type="text" name="penerbit" value="<?php echo $d['nama_rak']; ?>">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             <?php
