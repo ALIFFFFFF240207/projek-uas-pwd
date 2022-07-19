@@ -39,11 +39,15 @@
                             <a href="anggota.php" class="nav-link px-0 align-middle text-white">
                                 <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Anggota</span></a>
                         </li>
-                        
+
                         <li>
                             <a href="logout.php" class="nav-link px-0 align-middle text-white">
                                 <i class="fs-4 bi bi-door-open"></i> <span class="ms-1 d-none d-sm-inline">Sign-out</span> </a>
                         </li>
                     </ul>
+                    <div class="dropdown pb-4">
+                        <span class="d-none d-sm-inline mx-1"><?php echo $_SESSION['level']; ?></span>
+                        <span class="d-none d-sm-inline mx-1"><?php echo $_SESSION['nama_lengkap']; ?></span>
+                    </div>
                 </div>
             </div>

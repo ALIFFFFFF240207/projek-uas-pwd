@@ -141,7 +141,7 @@
 
                                             <br>
 
-                                            <label class="form-group">Tanggal Pinjam</label><br />
+                                            <label class="form-group">Tanggal Kembali</label><br />
                                             <input class="form-control" type="date" name="tgl_kembali" id="datePicker" value="">
 
                                             <br>

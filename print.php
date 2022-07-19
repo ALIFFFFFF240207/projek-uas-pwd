@@ -8,7 +8,6 @@ $to_date = $_POST['to_date'];
 
 //select query 
 if (isset($_POST['from_date']) && isset($_POST['to_date'])) {
-
     $query = "SELECT * FROM meminjam where tgl_pinjam between '" . $from_date . "' and '" . $to_date . "' && kembali='2'";
 }
 
@@ -19,7 +18,7 @@ $laporan_arr = array();
 $file = fopen($filename, "w");
 
 //Header Row
-$laporan_arr = array("Tanggal Pinjam", "Tanggal Kembali", "Peminjam", "Buku");
+$laporan_arr = array("Id Pinjam", "Tanggal Pinjam", "Tanggal Kembali", "Peminjam", "Buku");
 
 while ($row = mysqli_fetch_assoc($result)) {
     $id_pinjam = $row['id_pinjam'];

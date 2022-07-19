@@ -42,8 +42,10 @@
 
     <table border="2" class="table">
         <div class="row">
-            <div class="col-5 mb-5">
-
+            <div class="col-5 mb-4">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalExport">
+                    Export Ke CSV
+                </button>
             </div>
             <div class="col-2">
 
@@ -117,28 +119,31 @@
             </li>
         </ul>
     </nav>
-    <div class="row justify-content-start">
-        <div class="col-8">
-            <form method="post" action="print.php">
-                <br>
-                <h2>Cetak Riwayat Peminjaman Buku</h2>
-                <br>
-                <!-- DatePicker -->
-                <div class="input-group">
-                    <div class="col-4 ">
-                        <input type="date" class="datepicker form-control" placeholder="Dari Tanggal" name="from_date" id='from_date'>
-                    </div>
-                    <div class="col-4 mx-3">
-                        <input type="date" class="datepicker form-control" placeholder="Sampai Tanggal" name="to_date" id='to_date'>
-                    </div>
-                    <div class="col-2">
-                        <button class="btn btn-primary" name="export" type="submit"><i class="bi bi-file-earmark-spreadsheet-fill"> Export </i></button>
-                    </div>
+    <div class="modal fade" id="modalExport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Export Data Ke CSV</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="export.php">
+                        <!-- DatePicker -->
+                        <div class="input-group my-4">
+                            <label for="dari" class="input-group"> Dari Tanggal </label>
+                            <input type="date" class="datepicker form-control mb-3" placeholder="Dari Tanggal" name="from_date" id='from_date'>
+                            <label for="dari" class="input-group"> Sampai Tanggal </label>
+                            <input type="date" class="datepicker form-control " placeholder="Sampai Tanggal" name="to_date" id='to_date'>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button class="btn btn-primary" name="export" type="submit"><i class="bi bi-file-earmark-spreadsheet-fill"> Export </i></button>
+
+                        </div>
+                    </form>
                 </div>
 
-
-
-            </form>
+            </div>
         </div>
     </div>
 </div>
