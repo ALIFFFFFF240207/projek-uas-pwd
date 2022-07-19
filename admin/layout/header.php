@@ -41,7 +41,7 @@
                         </li>
 
                         <li>
-                            <a href="logout.php" class="nav-link px-0 align-middle text-white">
+                            <a href="../logout.php" class="nav-link px-0 align-middle text-white">
                                 <i class="fs-4 bi bi-door-open"></i> <span class="ms-1 d-none d-sm-inline">Sign-out</span> </a>
                         </li>
                     </ul>
