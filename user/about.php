@@ -16,7 +16,11 @@
             <div class="container mt-5">
                 <h1 class="text-center">About Sistem Informasi Perpustakaan</h1>
                 <img src="./assets/login.svg" alt="" style="width: 350px; margin-left:350px; margin-top:50px;">
-                <p class="text-center mt-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint, porro dolorem possimus, adipisci dolore quam doloribus ratione assumenda pariatur, officia tenetur magni quo magnam aliquid maiores provident laboriosam debitis nihil.</p>
+                <b>
+                    <p class="text-center mt-4">Final Project For Basic Website Programming</p>
+                </b>
+                <p class="text-center mt-4">Created By </p>
+                <p class="text-center mt-4">Alif Firdiansyah - 20410100062 & Rizky Firman Setiya Putra - 20410100059</p>
             </div>
 
         </div>
